@@ -1,6 +1,4 @@
-//Start here
-let upLoads = [];
-let idCounter = 0;
+//Let's start!!!
 let productPriceNum;
 
 document
@@ -9,53 +7,69 @@ document
     event.preventDefault();
 
     const productName = document.getElementById("productName").value;
-    console.log(productName);
     const productPrice = document.getElementById("productPrice").value;
-    console.log(productPrice);
     const productImage = document.getElementById("productImage").value;
-    console.log(productImage);
-    const errorMessage = document.getElementById("errorMessage");
 
-    //Validation
+     //Validation
     if (productName.length < 5 || productName.length > 30) {
-      errorMessage.textContent =
-        "Product Name must be at least 5 characters, and not over 30 characters.";
-      return;
+        alert("Product Name must be at least 5 characters, and not over 30 characters.");
+        return;
     }
 
     productPriceNum = Number(productPrice);
-    console.log(productPrice);
-    console.log(typeof productPrice);
-    console.log(productPriceNum);
-    console.log(typeof productPriceNum);
 
     if (isNaN(productPriceNum)) {
-      console.log("Price is not a Number");
-      errorMessage.textContent = "Price must be a Number.";
-      return;
-    } else {
-      console.log("Price is a valid Number");
-    }
+        alert("Price must be a Number.");
+        return;
+    } 
 
     if (!isImgUrl(productImage)) {
-      errorMessage.textContent =
-        "Image URL must be file type; Jpg, Jpeg, Png, Gif.";
-      return;
+        alert("Image URL must be file type; Jpg, Jpeg, Png, Gif.");
+        return;
     }
 
-    //Create new upload object
-    const newUpload = {
-      id: idCounter++,
+    //Create new Product object
+    const newProduct = {
       name: productName,
       price: productPriceNum,
-      imageURL: productImage,
+      image: productImage,
     };
+    console.log(newProduct);
+    console.log(products);
 
-    upLoads.push(newUpload);
-    // displayUpload(newUpload);
-    errorMessage.textContent = "";
-    document.getElementById("productForm").reset();
+    addProductToDashboard(newProduct);
+    
+    document.getElementById("productForm").reset(); //Reset product form
   });
+
+  let products =[];
+
+  function addProductToDashboard(newProduct) {
+    products.push(newProduct);
+    displayProductDashboard();
+}
+
+
+//Display Product on Product Dashboard
+function displayProductDashboard() {
+    const productDashboard = document.getElementById("productDashboard");
+    products.forEach((newProduct, index) => {
+        const productDiv = document.createElement("div");
+        productDiv.className = "bg-grey-100 rounded flex justify-between";
+        
+        productDiv.innerHTML =`
+        <input type="checkbox" class="mr-6">
+        <img src="${newProduct.image} alt="${newProduct.name}" class="w-12 h-12 object-cover rounded">
+        <span class="text-base font-semibold text-gray-800">${newProduct.name}</span>
+        <span class="text-base font-semibold text-gray-800">THB ${newProduct.price}</span>
+        `;
+        
+        console.log(newProduct.name);
+        console.log(newProduct.price);
+
+        productDashboard.appendChild(productDiv);
+    });
+}
 
 // Validating image URLs using RegEx
 function isImgUrl(productImage) {

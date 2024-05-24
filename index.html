@@ -31,7 +31,6 @@
             <label for="productImage" class="text-sm">Image URL:</label>
             <input type="url" id="productImage" class="rounded" required />
           </div>
-          <p id="errorMessage" class="text-red-600"></p>
           <button
             type="submit"
             id="createProduct"
@@ -42,7 +41,7 @@
         </form>
       </div>
 
-      <div id="productDashboard" class="bg-green-100">
+      <section id="productDashboard" class="bg-green-100 mx-auto">
         <h2 class="text-xl font-semibold">Product Dashboard</h2>
         <button
           type="button"
@@ -51,9 +50,9 @@
         >
           Add to Cart
         </button>
-      </div>
+      </section>
 
-      <div id="cartSelection" class="bg-purple-100">
+      <section id="cartSelection" class="bg-purple-100">
         <h2 class="text-xl font-semibold">Your Cart</h2>
         <button
           type="button"
@@ -62,7 +61,7 @@
         >
           Calculate Final Price
         </button>
-      </div>
+      </section>
     </div>
     <script src="./script.js"></script>
   </body>
